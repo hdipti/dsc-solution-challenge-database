@@ -1,17 +1,19 @@
-drop table sc2021_schema.author;
-drop table sc2021_schema.post;
-drop table sc2021_schema.comment;
-drop table sc2021_schema.candidate;
-drop table sc2021_schema.login;
+CREATE SCHEMA `sc2021` ;
 
-CREATE TABLE IF NOT EXISTS sc2021_schema.`author` (
+drop table sc2021.author;
+drop table sc2021.post;
+drop table sc2021.comment;
+drop table sc2021.candidates;
+drop table sc2021.login;
+
+CREATE TABLE IF NOT EXISTS sc2021.`author` (
   `author_Id` INT UNSIGNED unsigned NOT NULL AUTO_INCREMENT,
   `author_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `author_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`author_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS sc2021_schema.`post` (
+CREATE TABLE IF NOT EXISTS sc2021.`post` (
   `post_Id` INT UNSIGNED unsigned NOT NULL AUTO_INCREMENT,
   `author_Id` INT UNSIGNED unsigned NOT NULL,
   `post_date` datetime NOT NULL,
@@ -22,10 +24,10 @@ CREATE TABLE IF NOT EXISTS sc2021_schema.`post` (
   PRIMARY KEY (`post_Id`),
   CONSTRAINT fk_author_Id
     FOREIGN KEY (`author_Id` ) 
-        REFERENCES `authors` (`author_Id` )
+        REFERENCES `author` (`author_Id` )
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS sc2021_schema.`comment` (
+CREATE TABLE IF NOT EXISTS sc2021.`comment` (
   `comment_Id` INT UNSIGNED unsigned NOT NULL AUTO_INCREMENT,
   `post_Id` INT UNSIGNED unsigned NOT NULL,
   `comment_count` INT UNSIGNED unsigned NOT NULL,
@@ -37,10 +39,10 @@ CREATE TABLE IF NOT EXISTS sc2021_schema.`comment` (
   PRIMARY KEY (`comment_Id`),
   CONSTRAINT fk_post_Id
   FOREIGN KEY (`post_Id`) 
-	REFERENCES `posts`(`post_Id`)
+	REFERENCES `post`(`post_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS sc2021_schema.`candidate` (
+CREATE TABLE IF NOT EXISTS sc2021.`candidate` (
   `candidate_Id` INT UNSIGNED unsigned NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -49,7 +51,7 @@ CREATE TABLE IF NOT EXISTS sc2021_schema.`candidate` (
   PRIMARY KEY (`candidate_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS sc2021_schema.`login` (
+CREATE TABLE IF NOT EXISTS sc2021.`login` (
   `login_Id` INT UNSIGNED unsigned NOT NULL AUTO_INCREMENT,
   `candidate_Id` INT UNSIGNED unsigned NOT NULL,
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -57,5 +59,5 @@ CREATE TABLE IF NOT EXISTS sc2021_schema.`login` (
   PRIMARY KEY (`login_Id`),
   CONSTRAINT fk_candidate_Id
   FOREIGN KEY (`candidate_Id`) 
-	REFERENCES `candidates`(`candidate_Id`)
+	REFERENCES `candidate`(`candidate_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
