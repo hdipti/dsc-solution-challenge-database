@@ -3,7 +3,7 @@ CREATE SCHEMA `sc2021` ;
 drop table sc2021.author;
 drop table sc2021.post;
 drop table sc2021.comment;
-drop table sc2021.candidates;
+drop table sc2021.candidate;
 drop table sc2021.login;
 
 CREATE TABLE IF NOT EXISTS sc2021.`author` (
@@ -48,6 +48,8 @@ CREATE TABLE IF NOT EXISTS sc2021.`candidate` (
   `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`candidate_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
